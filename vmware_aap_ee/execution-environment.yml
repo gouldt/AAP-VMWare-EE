@@ -1,0 +1,61 @@
+---
+version: 3
+
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--ignore-certs'
+
+images:
+  base_image:
+    name: xxxx/ansible-automation-platform-24/ee-minimal-rhel8:latest
+
+dependencies:
+  galaxy: 
+    collections:
+
+      - name: ansible.controller # red hat certified collection
+        version: ">=4.4.2"
+      - name: ansible.netcommon # red hat certified collection
+        version: ">=5.0.0"
+      - name: ansible.network # red hat certified collection
+        version: ">=2.0.0"
+      - name: ansible.posix # red hat certified collection
+        version: ">=1.5.0"
+      - name: ansible.utils # red hat certified collection
+        version: ">=2.12.0"
+
+      - name: community.general
+        version: ">=8.0.0"
+      - name: community.postgresql
+        version: ">=3.3.0"
+      - name: community.vmware
+        version: ">=3.7.0"
+
+      - name: redhat.rhel_system_roles # red hat certified collection
+        version: ">=1.21.2"
+      - name: redhat.satellite # red hat certified collection
+        version: ">=3.14.0"
+      - name: redhat.satellite_operations # red hat certified collection
+        version: ">=2.1.0"
+      - name: vmware.vmware_rest # red hat certified collection
+        version: ">=2.3.1"
+  python: files/requirements.txt
+
+options:
+  package_manager_path: /usr/bin/microdnf
+
+additional_build_files:
+  - src: files # copy contents from files to configs dir in build context
+    dest: configs
+
+additional_build_steps:
+  prepend_galaxy:
+    # reference the file from build context like this
+    - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
+  append_builder:
+    - RUN update-ca-trust
+  #   - RUN microdnf install crypto-policies-scripts
+  #   - RUN update-crypto-policies --set DEFAULT:AD-SUPPORT
+  #append_final:
+  # Verify passwordmanagerpro.py is present. Then we don't need it in lookup_plugins dir for each role that needs.
+  #  - RUN grep getResourceIdAccountId /usr/lib/python3.9/site-packages/ansible/plugins/lookup/passwordmanagerpro.py
+ 
