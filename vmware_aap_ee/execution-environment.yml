@@ -6,7 +6,7 @@ build_arg_defaults:
 
 images:
   base_image:
-    name: xxxx/ansible-automation-platform-24/ee-minimal-rhel8:latest
+    name: aap-automationhub-01.lab04.convergetpcloud.com/ansible-automation-platform-24/ee-minimal-rhel9:latest
 
 dependencies:
   galaxy: 
@@ -30,7 +30,7 @@ dependencies:
       - name: community.vmware
         version: ">=3.7.0"
       - name:  ibm_messaging.ibmmq
-         version: ">=1.0.0"
+        version: ">=1.0.0"
         
       - name: redhat.rhel_system_roles # red hat certified collection
         version: ">=1.21.2"
