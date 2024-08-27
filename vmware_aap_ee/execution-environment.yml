@@ -29,7 +29,9 @@ dependencies:
         version: ">=3.3.0"
       - name: community.vmware
         version: ">=3.7.0"
-
+      - name:  ibm_messaging.ibmmq
+         version: ">=1.0.0"
+        
       - name: redhat.rhel_system_roles # red hat certified collection
         version: ">=1.21.2"
       - name: redhat.satellite # red hat certified collection
