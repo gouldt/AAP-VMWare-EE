@@ -6,7 +6,7 @@ build_arg_defaults:
 
 images:
   base_image:
-    name: aap-automationhub-01.lab04.convergetpcloud.com/ee-minimal-rhel9:latest
+    name: aap-automationhub-01.lab04.convergetpcloud.com/ee-minimal-rhel8:latest
 
 dependencies:
   galaxy: 
